@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assessment Ready | Readiness Command Center</title>
+<meta name="description" content="Illustrative demo by Knowledge Group: a readiness command center for institutional excellence assessment, with example data.">
+<style>
+:root{--teal:#006580;--teal-dk:#00475A;--teal-2:#1B7690;--teal-3:#3C8FA5;--teal-4:#7FB2BF;--teal-10:#E6F0F2;--gold:#F4B223;--gold-t:#FDF3DC;--orange:#E67425;--ink:#1A1A1A;--sub:#4A4A4A;--mute:#6B6B6B;--line:#E3E6E8;--bg:#F5F7F8;--card:#FFFFFF;--ok:#2E8540;--amb:#C77700;--bad:#B3261E;--g1:#E9E9EA;--g2:#C4C6C8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.4}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.top{max-width:1320px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.top img{height:34px}
+.ttl{flex:1;min-width:240px}
+.ttl h1{margin:0;font-size:19px;color:var(--teal)}
+.ttl p{margin:2px 0 0;color:var(--mute);font-size:12.5px}
+.badge{background:var(--gold-t);color:var(--teal-dk);border:1px solid #F3D48A;border-radius:999px;padding:4px 10px;font-size:11.5px;font-weight:bold;white-space:nowrap}
+.seg{display:flex;background:var(--teal-10);border-radius:10px;padding:3px}
+.seg button{border:0;background:transparent;padding:8px 12px;border-radius:8px;font:bold 12.5px Arial;color:var(--teal-dk);cursor:pointer;white-space:nowrap}
+.seg button.on{background:var(--teal);color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.goldbar{height:3px;background:linear-gradient(90deg,var(--teal) 0%,var(--teal) 60%,var(--gold) 60%)}
+main{max-width:1320px;margin:0 auto;padding:18px 20px 40px}
+.grid{display:grid;gap:16px}
+.g6{grid-template-columns:repeat(6,1fr)}
+.g12{grid-template-columns:repeat(12,1fr)}
+.c8{grid-column:span 8}.c4{grid-column:span 4}.c7{grid-column:span 7}.c5{grid-column:span 5}.c6{grid-column:span 6}.c12{grid-column:span 12}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;position:relative}
+.card h2{margin:0 0 2px;font-size:15px;color:var(--teal)}
+.card .hint{margin:0 0 12px;color:var(--mute);font-size:12px}
+.kpi{padding:14px 14px 10px;border-top:3px solid var(--teal)}
+.kpi.gold{border-top-color:var(--gold)}
+.kpi .lab{font-size:11.5px;color:var(--mute);font-weight:bold;text-transform:uppercase;letter-spacing:.4px}
+.kpi .val{font-size:30px;font-weight:bold;color:var(--teal-dk);margin:4px 0 0}
+.kpi .val small{font-size:14px;color:var(--mute);font-weight:normal}
+.kpi .dl{font-size:12px;font-weight:bold;margin-top:2px}
+.up{color:var(--ok)}.down{color:var(--ok)}
+.kpi svg{display:block;margin-top:6px}
+.hm{display:grid;grid-template-columns:minmax(150px,1.6fr) repeat(9,minmax(26px,.5fr)) 46px;gap:3px;align-items:center;font-size:12px}
+.hm .h{font-weight:bold;text-align:center;background:var(--teal);color:#fff;border-radius:4px;padding:4px 0}
+.hm .h.key{background:var(--gold);color:var(--teal-dk)}
+.hm .rn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:6px;cursor:pointer}
+.hm .rn.sel{font-weight:bold;color:var(--teal)}
+.cell{height:24px;border-radius:4px;cursor:pointer;position:relative;transition:transform .12s, background .4s}
+.cell:hover{transform:scale(1.12);z-index:2}
+.cell.capped::after{content:"";position:absolute;inset:0;border-radius:4px;background:repeating-linear-gradient(45deg,rgba(255,255,255,.0) 0 4px,rgba(230,116,37,.35) 4px 6px)}
+.cell.self{outline:2px solid var(--gold);outline-offset:1px}
+.rowscore{text-align:right;font-weight:bold;color:var(--teal-dk)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:11.5px;color:var(--sub);align-items:center}
+.sw{display:inline-block;width:14px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+.hatch{background:repeating-linear-gradient(45deg,#fff 0 4px,rgba(230,116,37,.55) 4px 6px);border:1px solid var(--g2)}
+.det h3{margin:0;font-size:16px;color:var(--teal-dk)}
+.det .ownl{color:var(--mute);font-size:12px;margin:2px 0 10px}
+.bars .b{display:grid;grid-template-columns:20px 1fr 52px;gap:8px;align-items:center;margin:5px 0;font-size:12px}
+.bars .tr{height:10px;background:var(--g1);border-radius:6px;overflow:hidden}
+.bars .fl{height:100%;border-radius:6px;transition:width .5s}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:bold}
+.p-ok{background:#E5F2E8;color:var(--ok)}.p-amb{background:#FFF1DC;color:var(--amb)}.p-bad{background:#FBE7E6;color:var(--bad)}.p-teal{background:var(--teal-10);color:var(--teal-dk)}
+.capnote{background:var(--gold-t);border-left:4px solid var(--gold);padding:8px 10px;border-radius:6px;font-size:12.5px;margin:10px 0}
+.acts{margin:6px 0 0;padding-left:18px;font-size:12.5px}
+.acts li{margin:3px 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;color:#fff;background:var(--teal);padding:8px;font-size:12px;position:sticky;top:0}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:hover td{background:#FAFCFC}
+.tblwrap{max-height:340px;overflow:auto;border-radius:8px;border:1px solid var(--line)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.filters select,.filters button{font:12.5px Arial;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--teal-dk);cursor:pointer}
+.filters button.on{background:var(--teal-dk);color:#fff;border-color:var(--teal-dk)}
+.run{background:var(--teal);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:bold 13px Arial;cursor:pointer}
+.run:disabled{opacity:.6;cursor:default}
+.scan{height:8px;background:var(--g1);border-radius:6px;overflow:hidden;margin:10px 0}
+.scan div{height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--gold));transition:width .2s}
+.flag{border:1px solid var(--line);border-left:4px solid var(--bad);border-radius:8px;padding:9px 11px;margin:8px 0;background:#fff;animation:fade .35s ease}
+.flag.med{border-left-color:var(--amb)}.flag.low{border-left-color:var(--teal-3)}
+.flag.res{opacity:.55;border-left-color:var(--ok)}
+.flag .t{font-weight:bold;color:var(--teal-dk);font-size:12.5px}
+.flag .d{font-size:12.5px;color:var(--sub);margin-top:3px}
+.flag .fx{font-size:12px;color:var(--teal);margin-top:4px}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.owners{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.own{aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;color:#fff;cursor:default;transition:background .4s}
+.diff{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.dc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;border-top:3px solid var(--gold)}
+.dc .from{color:var(--mute);font-size:12px;text-decoration:line-through}
+.dc .to{color:var(--teal-dk);font-weight:bold;font-size:14px;margin-top:4px}
+.dc p{font-size:12.5px;color:var(--sub);margin:6px 0 0}
+.phases{display:flex;gap:4px;margin-top:8px}
+.ph{flex:1;text-align:center;font-size:11px;font-weight:bold;padding:7px 2px;border-radius:6px;background:var(--g1);color:var(--mute)}
+.ph.done{background:var(--teal);color:#fff}.ph.now{background:var(--gold);color:var(--teal-dk)}
+footer{max-width:1320px;margin:0 auto;padding:0 20px 30px;color:var(--mute);font-size:12px}
+.secttl{display:flex;align-items:baseline;gap:10px;margin:22px 0 10px}
+.secttl h2{margin:0;font-size:18px;color:var(--teal-dk)}
+.secttl span{color:var(--mute);font-size:12.5px}
+.tip{position:fixed;pointer-events:none;background:var(--teal-dk);color:#fff;padding:6px 9px;border-radius:6px;font-size:12px;z-index:50;display:none;max-width:260px}
+@media(max-width:1000px){.g6{grid-template-columns:repeat(3,1fr)}.c8,.c4,.c7,.c5,.c6{grid-column:span 12}.diff{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.g6{grid-template-columns:repeat(2,1fr)}.diff{grid-template-columns:1fr}.owners{grid-template-columns:repeat(6,1fr)}.hm{font-size:10.5px;grid-template-columns:minmax(96px,1.4fr) repeat(9,minmax(18px,.5fr)) 34px}.cell{height:20px}.top img{height:28px}.kpi .val{font-size:24px}.seg{width:100%}.seg button{flex:1;padding:8px 4px;font-size:11.5px}}
+</style>
+</head>
+<body>
+<header>
+<div class="top">
+<img src="kg-logo.png" alt="Knowledge Group">
+<div class="ttl">
+<h1>Assessment Ready &middot; Readiness Command Center</h1>
+<p>Prepared for the Institute of Applied Technology &middot; Abu Dhabi Government Performance and Excellence Model (2026)</p>
+</div>
+<span class="badge">Illustrative demo &middot; example data</span>
+<div class="seg" id="seg">
+<button data-s="0">Baseline &middot; Week 3</button>
+<button data-s="1" class="on">Mock 1 &middot; Week 8</button>
+<button data-s="2">Mock 2 &middot; Week 12</button>
+</div>
+</div>
+<div class="goldbar"></div>
+</header>
+<main>
+<div class="grid g6" id="kpis"></div>
+<div class="secttl"><h2>Where points are won and lost</h2><span>13 criteria scored on the nine attributes. Click any criterion or cell.</span></div>
+<div class="grid g12">
+<div class="card c8">
+<h2>Readiness heatmap</h2>
+<p class="hint">Hatched cells are capped: attribute A caps B and C; attribute D caps E to I. Fix the cap and the whole row can rise.</p>
+<div class="hm" id="hm"></div>
+<div class="legend" id="leg"></div>
+</div>
+<div class="card c4 det" id="det"></div>
+</div>
+<div class="secttl"><h2>The readiness journey</h2><span>Measured, not assumed: the same scorecard at every stage.</span></div>
+<div class="grid g12">
+<div class="card c7">
+<h2>Overall readiness over 14 weeks</h2>
+<p class="hint">Average score across all 117 cells (13 criteria x 9 attributes), against the target agreed at the week 3 readout.</p>
+<div id="journey"></div>
+<div class="phases" id="phases"></div>
+</div>
+<div class="card c5">
+<h2>Lift by criterion</h2>
+<p class="hint">Baseline versus the selected stage, in readiness points.</p>
+<div id="lift"></div>
+</div>
+</div>
+<div class="secttl"><h2>AI consistency check</h2><span>The 2026 assessment cycle uses AI to check claims against data. We run the same check first.</span></div>
+<div class="grid g12">
+<div class="card c5">
+<h2>Check the narrative against the numbers</h2>
+<p class="hint">Runs on approved, secure tools only. AI flags; IAT's people decide and write.</p>
+<button class="run" id="runbtn">Run consistency check</button>
+<div class="scan"><div id="scanbar"></div></div>
+<div id="scantxt" style="font-size:12.5px;color:var(--sub)">Ready to scan 13 criterion narratives, 78 KPI cards and the evidence register.</div>
+<div id="flagstats" style="margin-top:10px"></div>
+</div>
+<div class="card c7">
+<h2>Flags found</h2>
+<p class="hint">Each flag shows the claim, the data, and the fix. Resolved flags fade.</p>
+<div id="flags" style="max-height:360px;overflow:auto"></div>
+</div>
+</div>
+<div class="secttl"><h2>Evidence and KPI register</h2><span>One source of truth for every claim.</span></div>
+<div class="card">
+<div class="filters" id="filters"></div>
+<div class="tblwrap"><table id="reg"></table></div>
+</div>
+<div class="secttl"><h2>Criteria Owner readiness</h2><span>Scored mock interviews: story, evidence and answers to hard questions.</span></div>
+<div class="grid g12">
+<div class="card c6">
+<h2>30 Criteria Owners</h2>
+<p class="hint">Each tile is one owner (example). Hover for the scores.</p>
+<div class="owners" id="owners"></div>
+<div class="legend" id="oleg"></div>
+</div>
+<div class="card c6">
+<h2>Mock interview scores</h2>
+<p class="hint">Distribution of owner scores out of 100. Ready = 70 or above.</p>
+<div id="hist"></div>
+</div>
+</div>
+<div class="secttl"><h2>Why this is different</h2><span>What IAT gets that a training course cannot give.</span></div>
+<div class="diff">
+<div class="dc"><div class="from">Generic slides and case studies</div><div class="to">IAT's own criteria, evidence and KPIs</div><p>Every session and clinic works on real material, so the work done in the room is work IAT keeps.</p></div>
+<div class="dc"><div class="from">Opinions about readiness</div><div class="to">A score on the nine attributes</div><p>The same scorecard assessors use, applied at week 3, week 8 and week 12, so progress is measured.</p></div>
+<div class="dc"><div class="from">Hoping the numbers line up</div><div class="to">An AI check before the assessors run theirs</div><p>Narratives, KPI cards and the register are checked against each other, and every gap gets an owner.</p></div>
+<div class="dc"><div class="from">Dependence on consultants</div><div class="to">Internal assessors and ten tools</div><p>The Excellence Team leaves able to run mock assessments every cycle, with the toolkit it used.</p></div>
+</div>
+</main>
+<footer>
+All figures, owners and evidence items on this page are illustrative examples created by Knowledge Group to show the format. They are not IAT data. &middot; Knowledge Group, Abu Dhabi &middot; www.kgc.com
+</footer>
+<div class="tip" id="tip"></div>
+<script>
+const CRIT=[['1.1','Human-Centric Strategy'],['1.2','Future Readiness and Strategic Alignment'],['1.3','Human Capability and HR'],['1.4','Digital Capability and Technology'],['1.5','Service Delivery'],['1.6','Governance'],['1.7','Collaboration'],['1.8','Organisational Learning'],['1.9','Communications'],['1.10','Risk Management'],['1.11','Financial and Asset Management'],['2.1','Adaptability and Innovation'],['3.1','Sustainable Performance']];
+const ATT=[['A','Plan based on needs, best practice and foresight'],['B','Plan aligned with mandate and strategy'],['C','Rolled out in all key areas'],['D','Suitable metrics in place'],['E','Data is relevant, timely and trustworthy'],['F','Data drives learning and improvement'],['G','Ambitious targets set and met'],['H','High or improving over time'],['I','Compares well with benchmarks']];
+const BAND=['None','Some','Many','Most','All'];
+const BCOL=['#E9E9EA','#C4C6C8','#7FB2BF','#3C8FA5','#006580'];
+const OWNER=['Strategy and Planning','Strategy and Planning','Human Resources','Information Technology','Student Services','Office of the Director General','Partnerships','Quality and Institutional Effectiveness','Communications','Risk and Compliance','Finance','Innovation','Quality and Institutional Effectiveness'];
+const BASE=[[3,3,2,2,2,1,1,1,1],[3,3,3,3,2,2,2,2,1],[2,2,2,3,3,2,2,2,1],[3,2,2,1,1,1,1,0,0],[4,3,3,3,3,2,3,2,2],[3,3,3,2,2,2,1,1,1],[2,2,1,1,1,1,1,0,0],[2,2,2,1,1,1,1,1,0],[3,3,3,3,2,2,2,2,1],[3,3,2,2,2,1,2,1,1],[4,4,3,3,3,3,3,2,2],[1,1,1,1,1,0,1,0,0],[3,3,3,2,2,2,2,2,1]];
+// lifts applied before cap rules: [mock1 lift, mock2 lift] per attribute for each row
+function capped(r){const x=r.slice();x[1]=Math.min(x[1],x[0]);x[2]=Math.min(x[2],x[0]);for(let k=4;k<9;k++)x[k]=Math.min(x[k],x[3]);return x}
+const L1=[[0,0,1,1,1,1,0,0,0],[1,0,0,0,1,1,0,0,0],[1,1,1,0,0,1,0,0,0],[0,1,1,2,1,1,1,1,1],[0,1,0,0,0,1,0,1,0],[0,0,0,1,1,1,1,1,0],[1,1,1,1,1,1,1,1,0],[1,1,0,2,1,1,1,1,1],[0,0,0,0,1,1,1,0,0],[0,0,1,1,0,1,0,1,0],[0,0,0,0,0,0,0,0,0],[2,1,1,2,1,1,1,1,0],[0,0,0,1,1,1,1,0,0]];
+const L2=[[1,1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[0,0,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,0,1],[0,0,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1]];
+const S=[BASE.map(capped)];
+S[1]=BASE.map((r,i)=>capped(r.map((v,k)=>Math.min(4,v+L1[i][k]))));
+S[2]=S[1].map((r,i)=>capped(r.map((v,k)=>Math.min(4,v+(v<=2||k===0||k===3?L2[i][k]:0)))));
+const pct=(m)=>Math.round(m.flat().reduce((a,b)=>a+b,0)/(m.length*36)*100);
+const rowPct=(r)=>Math.round(r.reduce((a,b)=>a+b,0)/36*100);
+let stage=1, sel=11;
+// ---------- owners and evidence (deterministic example data) ----------
+let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};
+const owners=[...Array(30)].map((_,i)=>{const b=36+rnd()*26;return [b,b+8+rnd()*12,b+16+rnd()*16].map(v=>Math.min(94,Math.round(v)))});
+const EV=[
+['1.1','Stakeholder needs study (students, families, employers)','Report','Strategy and Planning',['Gap','Verified','Verified']],
+['1.1','Student voice survey results with sample size','Survey','Student Services',['Needs data','Needs data','Verified']],
+['1.2','Strategic plan cascade to section plans','Policy','Strategy and Planning',['Verified','Verified','Verified']],
+['1.2','Industry certification rate KPI with 2026 target','KPI','Academic Affairs',['Needs data','Verified','Verified']],
+['1.3','Training hours per employee (HR system extract)','KPI','Human Resources',['Needs data','Verified','Verified']],
+['1.3','Succession plan for critical roles','Report','Human Resources',['Gap','Needs data','Verified']],
+['1.4','Learning platform adoption by site','KPI','Information Technology',['Gap','Needs data','Verified']],
+['1.4','Data privacy and AI use policy','Policy','Information Technology',['Needs data','Verified','Verified']],
+['1.5','Student and parent satisfaction trend (4 years)','KPI','Student Services',['Needs data','Verified','Verified']],
+['1.5','Service standards and response times','Policy','Student Services',['Verified','Verified','Verified']],
+['1.6','Committee minutes and decision log','Minutes','Office of the Director General',['Needs data','Verified','Verified']],
+['1.6','Delegation of authority matrix','Policy','Office of the Director General',['Verified','Verified','Verified']],
+['1.7','Partnership register with active outcomes','Register','Partnerships',['Gap','Needs data','Verified']],
+['1.7','Joint initiative results with industry partners','Report','Partnerships',['Gap','Gap','Needs data']],
+['1.8','Lessons-learned register','Register','Quality and Institutional Effectiveness',['Gap','Needs data','Verified']],
+['1.8','KPI dictionary with owners and sources','Policy','Quality and Institutional Effectiveness',['Needs data','Verified','Verified']],
+['1.9','Communication plan with reach and sentiment','Report','Communications',['Needs data','Verified','Verified']],
+['1.10','Business continuity test record','Report','Risk and Compliance',['Gap','Verified','Verified']],
+['1.10','Risk register reviewed quarterly','Register','Risk and Compliance',['Verified','Verified','Verified']],
+['1.11','Cost per student method and trend','KPI','Finance',['Needs data','Needs data','Verified']],
+['1.11','Asset maintenance plan and status','Report','Finance',['Verified','Verified','Verified']],
+['2.1','Innovation pipeline with measured outcomes','Register','Innovation',['Gap','Needs data','Verified']],
+['2.1','Pilot evaluation reports','Report','Innovation',['Gap','Gap','Needs data']],
+['3.1','Graduate employment and further study rate','KPI','Career Services',['Needs data','Verified','Verified']],
+['3.1','Benchmark against peer institutes','Report','Quality and Institutional Effectiveness',['Gap','Needs data','Needs data']]];
+const FLAGS=[
+['high','1.5 Service Delivery','Narrative says student satisfaction is 92%. The KPI card shows 88% for 2025.','Use 88%, show the four-year trend and explain the gap to target.',1],
+['high','3.1 Sustainable Performance','Strategy target for graduate employment is 80%; the narrative states 85%.','Align on the approved target and cite the strategy document.',1],
+['high','2.1 Adaptability and Innovation','14 innovations listed; only 6 have a measured outcome.','Add outcome data for the top 5 or remove unmeasured items.',2],
+['med','1.3 Human Capability and HR','Training hours per employee: 42 in the narrative, 38 in the HR system.','Use the system figure and state the data date.',1],
+['med','1.4 Digital Capability and Technology','"Adopted across all sites" but usage data covers 2 of 3 sites.','Report coverage honestly and show the rollout plan.',2],
+['med','1.7 Collaboration','12 partner agreements cited; the register shows 9 active.','Update the register or the narrative to one number.',1],
+['med','1.8 Organisational Learning','Lessons-learned register is referenced but not attached.','Attach the register with two examples of changes made.',1],
+['med','1.11 Financial and Asset Management','Cost per student calculated two different ways in two sections.','Use one method from the KPI dictionary.',2],
+['low','1.6 Governance','Q2 committee minutes missing from the evidence room.','Upload signed minutes and the decision log.',1],
+['low','1.9 Communications','Social media reach figure has no source.','Cite the platform report and period.',1],
+['low','1.2 Future Readiness and Strategic Alignment','KPI "industry certification rate" has no 2026 target.','Add the approved target to the KPI card.',1],
+['low','1.10 Risk Management','Business continuity test date not stated.','Add the test date and the actions taken.',1],
+['low','1.1 Human-Centric Strategy','Survey sample size not stated for the student voice survey.','State the sample and the response rate.',2],
+['high','1.4 Digital Capability and Technology','Metrics for digital services are counts only, with no outcome measure.','Add one outcome KPI (time saved or satisfaction) per service.',3]];
+// ---------- helpers ----------
+const $=(id)=>document.getElementById(id);
+const tip=$('tip');
+function showTip(e,html){tip.innerHTML=html;tip.style.display='block';tip.style.left=Math.min(e.clientX+12,innerWidth-280)+'px';tip.style.top=(e.clientY+12)+'px'}
+function hideTip(){tip.style.display='none'}
+function spark(vals,col){const w=150,h=34,mn=Math.min(...vals),mx=Math.max(...vals),r=mx-mn||1;const pts=vals.map((v,i)=>[i*(w-8)/(vals.length-1)+4,h-4-(v-mn)/r*(h-10)]);return `<svg width="100%" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" height="${h}"><polyline fill="none" stroke="${col}" stroke-width="2.2" points="${pts.map(p=>p.join(',')).join(' ')}"/>${pts.map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="${i===stage?3.6:2.2}" fill="${i===stage?'#F4B223':col}"/>`).join('')}</svg>`}
+// ---------- KPIs ----------
+function kpis(){
+const read=[0,1,2].map(i=>pct(S[i]));
+const most=[0,1,2].map(i=>S[i].filter(r=>Math.min(r[0],r[3])>=3).length);
+const ev=[0,1,2].map(i=>Math.round(EV.filter(e=>e[4][i]==='Verified').length/EV.length*100));
+const flags=[0,1,2].map(i=>FLAGS.filter(f=>f[4]>i).length);
+const ready=[0,1,2].map(i=>owners.filter(o=>o[i]>=70).length);
+const kc=[31,58,72];
+const T=[['Overall readiness',read,'%','',true],['Criteria with A and D at Most or All',most,'/13','',true],['Evidence verified',ev,'%','',true],['KPI cards complete',kc,'/78','',true],['Open AI flags',flags,'','',false],['Owners ready for interview',ready,'/30','',true]];
+$('kpis').innerHTML=T.map(([l,v,u,_,good],i)=>{const d=v[stage]-v[0];const sign=d>0?'+':'';const cls=(good?d>=0:d<=0)?'up':'down';return `<div class="card kpi ${i===0?'gold':''}"><div class="lab">${l}</div><div class="val">${v[stage]}<small>${u}</small></div><div class="dl ${cls}">${stage?`${sign}${d}${u==='%'?' pts':''} vs baseline`:'Baseline, week 3'}</div>${spark(v,i===0?'#006580':'#3C8FA5')}</div>`}).join('');
+}
+// ---------- heatmap ----------
+function heat(){
+const m=S[stage];let h='<div></div>'+ATT.map(a=>`<div class="h ${a[0]==='A'||a[0]==='D'?'key':''}" title="${a[1]}">${a[0]}</div>`).join('')+'<div class="h">%</div>';
+m.forEach((r,i)=>{
+const raw=stage===0?BASE[i]:(stage===1?BASE[i].map((v,k)=>Math.min(4,v+L1[i][k])):S[1][i].map((v,k)=>Math.min(4,v+(v<=2||k===0||k===3?L2[i][k]:0))));
+h+=`<div class="rn ${i===sel?'sel':''}" data-r="${i}">${CRIT[i][0]} ${CRIT[i][1]}</div>`;
+r.forEach((v,k)=>{const cap=raw[k]>v;h+=`<div class="cell ${cap?'capped':''} ${i===sel?'self':''}" data-r="${i}" data-k="${k}" style="background:${BCOL[v]}"></div>`});
+h+=`<div class="rowscore">${rowPct(r)}</div>`;
+});
+$('hm').innerHTML=h;
+$('leg').innerHTML=BAND.map((b,i)=>`<span><span class="sw" style="background:${BCOL[i]}"></span>${b}</span>`).join('')+`<span><span class="sw hatch"></span>Capped by A or D</span>`;
+document.querySelectorAll('#hm .rn,#hm .cell').forEach(el=>{
+el.onclick=()=>{sel=+el.dataset.r;render()};
+if(el.classList.contains('cell')){el.onmousemove=(e)=>{const r=+el.dataset.r,k=+el.dataset.k;showTip(e,`<b>${CRIT[r][0]} ${CRIT[r][1]}</b><br>${ATT[k][0]}: ${ATT[k][1]}<br>Rating: <b>${BAND[S[stage][r][k]]}</b>${el.classList.contains('capped')?'<br>Capped by '+(k<3?'A':'D'):''}`)};el.onmouseleave=hideTip}
+});
+}
+function detail(){
+const r=S[stage][sel],b=S[0][sel];const capA=r[0]<3,capD=r[3]<3;
+const acts={0:['Rebuild the plan basis with stakeholder and foresight inputs','Link each approach to the mandate'],3:['Replace activity counts with outcome KPIs','Add targets, benchmarks and data sources to every KPI card']};
+let note='';if(capA||capD){note=`<div class="capnote"><b>Cap alert:</b> ${capA?'A (plan basis) caps B and C. ':''}${capD?'D (suitable metrics) caps E to I.':''} Fixing ${capA&&capD?'A and D':capA?'A':'D'} lifts the ceiling for ${capA&&capD?'7':capA?'2':'5'} attributes.</div>`}else{note=`<div class="capnote" style="border-left-color:#2E8540;background:#E5F2E8"><b>No caps:</b> plan basis and metrics are strong, so results can score on their merit.</div>`}
+const ev=EV.filter(e=>e[0]===CRIT[sel][0]);
+const list=[...(capA?acts[0]:[]),...(capD?acts[3]:[]),'Rehearse the three-minute criterion story with the owner','Close open AI flags for this criterion'].slice(0,4);
+$('det').innerHTML=`<h3>${CRIT[sel][0]} ${CRIT[sel][1]}</h3><div class="ownl">Owner (example): ${OWNER[sel]} &middot; Readiness <b style="color:#00475A">${rowPct(r)}%</b> (baseline ${rowPct(b)}%)</div>
+<div class="bars">${ATT.map((a,k)=>`<div class="b"><b style="color:${a[0]==='A'||a[0]==='D'?'#C77700':'#006580'}">${a[0]}</b><div class="tr"><div class="fl" style="width:${(r[k]/4*100)||3}%;background:${BCOL[Math.max(r[k],1)]}"></div></div><span style="font-size:11.5px;color:#4A4A4A">${BAND[r[k]]}</span></div>`).join('')}</div>
+${note}<b style="font-size:12.5px;color:#006580">Evidence (${ev.length} items)</b><div style="margin:4px 0 8px">${ev.map(e=>pillFor(e[4][stage])+' <span style="font-size:12px">'+e[1]+'</span>').join('<br>')||'<span style="font-size:12px;color:#6B6B6B">No items yet</span>'}</div>
+<b style="font-size:12.5px;color:#006580">Next actions</b><ul class="acts">${list.map(a=>`<li>${a}</li>`).join('')}</ul>`;
+}
+function pillFor(s){return `<span class="pill ${s==='Verified'?'p-ok':s==='Gap'?'p-bad':'p-amb'}">${s}</span>`}
+// ---------- journey chart ----------
+function journey(){
+const read=[0,1,2].map(i=>pct(S[i]));
+const wk=[1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+const pts={3:read[0],8:read[1],12:read[2]};
+const est=wk.map(w=>w<=3?read[0]:w<=8?read[0]+(read[1]-read[0])*(w-3)/5:w<=12?read[1]+(read[2]-read[1])*(w-8)/4:read[2]+1*(w-12));
+const W=640,H=230,l=38,r=14,t=14,b=30,mx=100,mn=0;const X=w=>l+(w-1)/(13)*(W-l-r),Y=v=>t+(1-(v-mn)/(mx-mn))*(H-t-b);
+const shown=wk.filter(w=>w<=[3,8,14][stage]);
+let s=`<svg viewBox="0 0 ${W} ${H}" width="100%"><g font-size="11" fill="#6B6B6B">`;
+[0,25,50,75,100].forEach(v=>{s+=`<line x1="${l}" x2="${W-r}" y1="${Y(v)}" y2="${Y(v)}" stroke="#E3E6E8"/><text x="${l-6}" y="${Y(v)+4}" text-anchor="end">${v}</text>`});
+wk.forEach(w=>{s+=`<text x="${X(w)}" y="${H-10}" text-anchor="middle">W${w}</text>`});
+s+=`<line x1="${l}" x2="${W-r}" y1="${Y(75)}" y2="${Y(75)}" stroke="#F4B223" stroke-width="2" stroke-dasharray="6 4"/><text x="${W-r}" y="${Y(75)-6}" text-anchor="end" fill="#C77700" font-weight="bold">Target 75</text>`;
+s+=`<polyline fill="none" stroke="#C4C6C8" stroke-width="2" stroke-dasharray="3 4" points="${wk.map(w=>X(w)+','+Y(est[w-1])).join(' ')}"/>`;
+s+=`<polyline fill="none" stroke="#006580" stroke-width="3" points="${shown.map(w=>X(w)+','+Y(est[w-1])).join(' ')}"/>`;
+[[3,'Baseline'],[8,'Mock 1'],[12,'Mock 2']].forEach(([w,n],i)=>{if(i<=stage){s+=`<circle cx="${X(w)}" cy="${Y(pts[w])}" r="7" fill="${i===stage?'#F4B223':'#006580'}" stroke="#fff" stroke-width="2"/><text x="${X(w)}" y="${Y(pts[w])-14}" text-anchor="middle" font-weight="bold" fill="#00475A" font-size="12">${n}: ${pts[w]}</text>`}});
+s+='</g></svg>';$('journey').innerHTML=s;
+const ph=[['Diagnose',3],['Build',5],['Apply',9],['Rehearse',12],['Sustain',14]];const now=[3,8,12][stage];
+$('phases').innerHTML=ph.map(([n,e],i)=>{const st=e<=now?'done':(i===0||ph[i-1][1]<now)?'now':'';return `<div class="ph ${st}">${n}</div>`}).join('');
+}
+function lift(){
+const W=420,rowH=19,H=CRIT.length*rowH+24,l=44,r=40;const X=v=>l+v/100*(W-l-r);
+let s=`<svg viewBox="0 0 ${W} ${H}" width="100%"><g font-size="11">`;
+CRIT.forEach((c,i)=>{const y=6+i*rowH,b=rowPct(S[0][i]),n=rowPct(S[stage][i]);
+s+=`<text x="${l-6}" y="${y+11}" text-anchor="end" fill="#4A4A4A">${c[0]}</text><rect x="${l}" y="${y+2}" width="${X(100)-l}" height="12" rx="3" fill="#F0F2F3"/><rect x="${l}" y="${y+2}" width="${X(n)-l}" height="12" rx="3" fill="${i===sel?'#F4B223':'#3C8FA5'}"/><rect x="${l}" y="${y+2}" width="${X(b)-l}" height="12" rx="3" fill="#00475A" opacity=".85"/><text x="${X(n)+4}" y="${y+12}" fill="#00475A" font-weight="bold">${stage?'+'+(n-b):b}</text>`});
+s+=`<g transform="translate(${l},${H-8})"><rect width="10" height="8" fill="#00475A"/><text x="14" y="8" fill="#6B6B6B">Baseline</text><rect x="80" width="10" height="8" fill="#3C8FA5"/><text x="94" y="8" fill="#6B6B6B">Selected stage</text></g></g></svg>`;
+$('lift').innerHTML=s;
+}
+// ---------- AI check ----------
+let scanned=false;
+function flagsView(){
+const vis=FLAGS.map(f=>({f,res:stage+1>=f[4]&&stage>0?(f[4]<=stage):false}));
+const open=FLAGS.filter(f=>f[4]>stage).length;
+$('flagstats').innerHTML=scanned?`<span class="pill p-bad">${FLAGS.filter(f=>f[0]==='high'&&f[4]>stage).length} high</span> <span class="pill p-amb">${FLAGS.filter(f=>f[0]==='med'&&f[4]>stage).length} medium</span> <span class="pill p-teal">${FLAGS.filter(f=>f[0]==='low'&&f[4]>stage).length} low</span> <span class="pill p-ok">${FLAGS.length-open} resolved</span>`:'';
+$('flags').innerHTML=scanned?FLAGS.map(f=>{const res=f[4]<=stage;return `<div class="flag ${f[0]} ${res?'res':''}"><div class="t">${res?'Resolved: ':''}${f[1]}</div><div class="d">${f[2]}</div><div class="fx">Fix: ${f[3]}</div></div>`}).join(''):'<div style="color:#6B6B6B;font-size:12.5px;padding:20px 0">Run the check to see what the assessors\' AI would flag.</div>';
+}
+$('runbtn').onclick=()=>{
+const b=$('runbtn');b.disabled=true;let i=0;scanned=false;flagsView();
+const iv=setInterval(()=>{i++;$('scanbar').style.width=(i/13*100)+'%';$('scantxt').textContent=`Checking ${CRIT[Math.min(i,13)-1][0]} ${CRIT[Math.min(i,13)-1][1]}...`;
+if(i>=13){clearInterval(iv);b.disabled=false;b.textContent='Run again';scanned=true;$('scantxt').textContent=`Done. 13 narratives, 78 KPI cards and ${EV.length} register items checked against each other.`;flagsView()}},160);
+};
+// ---------- register ----------
+let fCrit='all',fStat='all';
+function reg(){
+const crits=['all',...new Set(EV.map(e=>e[0]))];
+$('filters').innerHTML=`<select id="fc">${crits.map(c=>`<option value="${c}" ${c===fCrit?'selected':''}>${c==='all'?'All criteria':c+' '+CRIT.find(x=>x[0]===c)[1]}</option>`).join('')}</select>`+['all','Verified','Needs data','Gap'].map(s=>`<button data-s="${s}" class="${s===fStat?'on':''}">${s==='all'?'All statuses':s} (${EV.filter(e=>s==='all'||e[4][stage]===s).length})</button>`).join('');
+$('fc').onchange=(e)=>{fCrit=e.target.value;reg()};
+document.querySelectorAll('#filters button').forEach(b=>b.onclick=()=>{fStat=b.dataset.s;reg()});
+const rows=EV.map((e,i)=>({e,i})).filter(({e})=>(fCrit==='all'||e[0]===fCrit)&&(fStat==='all'||e[4][stage]===fStat));
+$('reg').innerHTML=`<tr><th>ID</th><th>Criterion</th><th>Evidence item</th><th>Type</th><th>Owner (example)</th><th>Status</th></tr>`+rows.map(({e,i})=>`<tr><td style="color:#6B6B6B">EV-${e[0]}-${String(i+1).padStart(2,'0')}</td><td><b style="color:#006580">${e[0]}</b></td><td>${e[1]}</td><td>${e[2]}</td><td>${e[3]}</td><td>${pillFor(e[4][stage])}</td></tr>`).join('');
+}
+// ---------- owners ----------
+function ownerColor(v){return v>=80?'#006580':v>=70?'#3C8FA5':v>=55?'#F4B223':'#E67425'}
+function ownersView(){
+$('owners').innerHTML=owners.map((o,i)=>`<div class="own" data-i="${i}" style="background:${ownerColor(o[stage])}">${o[stage]}</div>`).join('');
+document.querySelectorAll('.own').forEach(el=>{const o=owners[+el.dataset.i];el.onmousemove=(e)=>showTip(e,`<b>Owner ${+el.dataset.i+1} (example)</b><br>Baseline ${o[0]} &middot; Mock 1 ${o[1]} &middot; Mock 2 ${o[2]}`);el.onmouseleave=hideTip});
+$('oleg').innerHTML=[['80+','#006580','Ready, strong'],['70 to 79','#3C8FA5','Ready'],['55 to 69','#F4B223','Close'],['Under 55','#E67425','Needs coaching']].map(([r,c,n])=>`<span><span class="sw" style="background:${c}"></span>${n} (${r})</span>`).join('');
+const bins=[0,0,0,0,0,0,0];owners.forEach(o=>{bins[Math.min(6,Math.max(0,Math.floor((o[stage]-30)/10)))]++});
+const W=420,H=200,l=24,b=26,bw=(W-l-10)/7,mx=Math.max(12,...bins);
+let s=`<svg viewBox="0 0 ${W} ${H}" width="100%"><g font-size="11" fill="#6B6B6B">`;
+bins.forEach((n,i)=>{const h=(H-b-14)*n/mx,x=l+i*bw+4,lo=30+i*10;s+=`<rect x="${x}" y="${H-b-h}" width="${bw-8}" height="${h}" rx="4" fill="${lo>=70?'#006580':lo>=55||lo===50?'#F4B223':'#E67425'}"/><text x="${x+(bw-8)/2}" y="${H-b-h-4}" text-anchor="middle" fill="#00475A" font-weight="bold">${n||''}</text><text x="${x+(bw-8)/2}" y="${H-8}" text-anchor="middle">${lo}${i===6?'+':''}</text>`});
+s+=`<line x1="${l+4*bw}" x2="${l+4*bw}" y1="6" y2="${H-b}" stroke="#00475A" stroke-dasharray="4 3"/><text x="${l+4*bw+4}" y="16" fill="#00475A" font-weight="bold">Ready line: 70</text></g></svg>`;
+$('hist').innerHTML=s;
+}
+function render(){kpis();heat();detail();journey();lift();flagsView();reg();ownersView()}
+document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#seg button').forEach(x=>x.classList.remove('on'));b.classList.add('on');stage=+b.dataset.s;render()});
+render();
+</script>
+</body>
+</html>
